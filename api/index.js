@@ -3,18 +3,20 @@ const cors = require("cors");
 
 const app = express();
 
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
+
+// 🔥 tambahan buat preflight (ini penting di Vercel)
+app.options("*", cors());
+
+// 🔥 fallback manual (biar anti gagal)
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-
-  // 🔥 HANDLE PREFLIGHT
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-
-  next();
-});
+  res.setHeader(
+    
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
