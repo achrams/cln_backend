@@ -67,8 +67,17 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+    const str = email.substring(0, 2);
 
-    const user = await User.findOne({ where: { email } });
+    let isPhone = false;
+
+    if (/^\d{2}$/.test(str)) isPhone = true;
+    const where = {};
+
+    if (isPhone) where.phone = email;
+    else where.email = email;
+
+    const user = await User.findOne({ where });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
