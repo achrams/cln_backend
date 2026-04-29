@@ -31,13 +31,16 @@
 
 // // ✅ export tunggal
 // module.exports = serverless(app);
-const express = require("express");
-const serverless = require("serverless-http");
+// const express = require("express");
+// const serverless = require("serverless-http");
 
-const app = express();
+// const app = express();
 
-app.get("/", (req, res) => {
-  return res.json({ status: "OK MINIMAL" });
-});
+// app.get("/", (req, res) => {
+//   return res.json({ status: "OK MINIMAL" });
+// });
 
-module.exports = serverless(app);
+// module.exports = serverless(app);
+module.exports = (req, res) => {
+  res.status(200).json({ status: "OK DIRECT" });
+};
