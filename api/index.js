@@ -16,17 +16,17 @@ app.get("/", (req, res) => {
 });
 
 // ✅ routes (HAPUS /api DI SINI)
-app.use("/api/auth", require("../routes/auth.routes"));
-app.use("/api/merchants", require("../routes/merchant.routes"));
-app.use("/api/provinces", require("../routes/province.routes"));
-app.use("/api/cities", require("../routes/city.routes"));
-app.use("/api/users", require("../routes/user.routes"));
-app.use("/api/sertifikasi", require("../routes/sertifikasi.routes"));
-app.use("/api/events", require("../routes/event.routes"));
-app.use("/api/notifications", require("../routes/notification.routes"));
-app.use("/api/magazines", require("../routes/magazine.routes"));
-app.use("/api/categories", require("../routes/category.routes"));
-app.use("/api/event-categories", require("../routes/event_category.routes"));
+app.use("/auth", require("../routes/auth.routes"));
+app.use("/merchants", require("../routes/merchant.routes"));
+app.use("/provinces", require("../routes/province.routes"));
+app.use("/cities", require("../routes/city.routes"));
+app.use("/users", require("../routes/user.routes"));
+app.use("/sertifikasi", require("../routes/sertifikasi.routes"));
+app.use("/events", require("../routes/event.routes"));
+app.use("/notifications", require("../routes/notification.routes"));
+app.use("/magazines", require("../routes/magazine.routes"));
+app.use("/categories", require("../routes/category.routes"));
+app.use("/event-categories", require("../routes/event_category.routes"));
 
 // 🔥 handler Vercel
 export default function handler(req, res) {
