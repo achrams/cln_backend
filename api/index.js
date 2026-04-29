@@ -32,15 +32,20 @@
 // // ✅ export tunggal
 // module.exports = serverless(app);
 const express = require("express");
-const serverless = require("serverless-http");
 
 const app = express();
 
+app.use(express.json());
+
 app.get("/", (req, res) => {
-  return res.json({ status: "OK MINIMAL" });
+  return res.json({ status: "OK EXPRESS" });
 });
 
-module.exports = serverless(app);
-// module.exports = (req, res) => {
-//   res.status(200).json({ status: "OK DIRECT" });
-// };
+app.get("/api/test", (req, res) => {
+  return res.json({ message: "API jalan 🚀" });
+});
+
+// 🔥 handler untuk Vercel
+export default function handler(req, res) {
+  return app(req, res);
+}
