@@ -23,6 +23,6 @@
     "sequelize": "^6.37.7",
     "sequelize-cli": "^6.6.5",
     "serverless-http": "^4.0.0",
-    "uuid": "^14.0.0"
+    "uuid": "^9.0.1"
   }
 }
