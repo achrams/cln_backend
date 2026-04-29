@@ -8,6 +8,21 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "user_id",
         as: "merchants",
       });
+
+      User.hasMany(models.Event_attendance, {
+        foreignKey: "user_id",
+        as: "event_attendances",
+      });
+
+      User.hasOne(models.Sertifikasi, {
+        foreignKey: "user_id",
+        as: "sertifikasi",
+      });
+
+      User.hasMany(models.Notification, {
+        foreignKey: "user_id",
+        as: "notifications",
+      });
     }
   }
 
@@ -45,7 +60,7 @@ module.exports = (sequelize, DataTypes) => {
       level: {
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: "I",
+        defaultValue: "III",
       },
       status: {
         type: DataTypes.STRING,

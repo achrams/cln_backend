@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const { User, Merchant, Category } = require("../models");
+const { User, Merchant, Category, Sertifikasi } = require("../models");
 const generateQRCodeWithLogo = require("../utils/qr.js"); // <-- import QR
 
 const {
@@ -152,7 +152,7 @@ exports.me = async (req, res) => {
         {
           model: Merchant,
           as: "merchants",
-          attributes: ["name", "code", "category_id"],
+          attributes: ["name", "code", "category_id", "status", "products"],
           required: false,
           include: [
             {
@@ -161,6 +161,11 @@ exports.me = async (req, res) => {
               attributes: ["name"], // 👈 ambil name category
             },
           ],
+        },
+        {
+          model: Sertifikasi,
+          as: "sertifikasi",
+          required: false,
         },
       ],
     });

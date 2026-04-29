@@ -99,7 +99,7 @@ module.exports = {
           tiktok_url,
           tokopedia,
           shopee_url,
-          status,
+          status: "Unpaid",
         },
         { transaction: t },
       );
@@ -122,7 +122,7 @@ module.exports = {
   async findAll(req, res) {
     try {
       const {
-        page = 1,
+        page = page || 1,
         limit = 10,
         category_id,
         province_id,

@@ -25,16 +25,15 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     const now = new Date();
 
-    const categories = cats.map((el) => {
-      ...el,
-      createdAt: now,
-      updatedAt: now
-    })
+    const categories = cats;
+    cats.forEach((el) => {
+      ((el.createdAt = now), (el.updatedAt = now));
+    });
 
     await queryInterface.bulkInsert("Categories", categories);
   },
 
   async down(queryInterface, Sequelize) {
-   await queryInterface.bulkDelete("Categories", null, {});
+    await queryInterface.bulkDelete("Categories", null, {});
   },
 };
