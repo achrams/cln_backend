@@ -39,7 +39,7 @@ module.exports = {
   },
 
   async create(req, res) {
-    const { user_id, bpom_url, pirt_url, halal_url } = req.body;
+    const { user_id, bpom_url, pirt_url, halal_url, nib_url } = req.body;
 
     try {
       const created = await Sertifikasi.create({
