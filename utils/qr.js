@@ -1,51 +1,27 @@
 // generateQR.js
 const QRCode = require("qrcode");
-const { createCanvas, loadImage } = require("canvas");
 const { bucket } = require("../firebase.js");
 const { v4: uuidv4 } = require("uuid");
 
-const qrSize = 600;
-
-const generateQRCodeWithLogo = async (token) => {
+const generateQRCode = async (token) => {
   try {
-    // canvas fresh tiap call (penting, jangan global)
-    const canvas = createCanvas(qrSize, qrSize);
-    const ctx = canvas.getContext("2d");
-
-    // generate QR
-    await QRCode.toCanvas(canvas, token, {
-      width: qrSize,
+    // 🔥 generate QR jadi buffer langsung (tanpa canvas)
+    const buffer = await QRCode.toBuffer(token, {
+      width: 600,
       errorCorrectionLevel: "H",
       margin: 1,
-      scale: 4,
       color: {
-        dark: "#ffffffff",
-        light: "#040404",
+        dark: "#000000",
+        light: "#ffffff",
       },
     });
 
-    // load logo (pakai path absolute biar aman)
-    const logo = await loadImage(require("path").join(__dirname, "cln.png"));
-
-    const logoSize = qrSize / 4;
-
-    ctx.drawImage(
-      logo,
-      qrSize / 2 - logoSize / 2,
-      qrSize / 2 - logoSize / 2,
-      logoSize,
-      logoSize,
-    );
-
-    // buffer (tidak simpan ke disk)
-    const buffer = canvas.toBuffer("image/png");
-
-    // upload ke firebase
     const filename = `qr/${uuidv4()}.png`;
     const file = bucket.file(filename);
 
     const tokenDownload = uuidv4();
 
+    // upload ke firebase
     await file.save(buffer, {
       metadata: {
         contentType: "image/png",
@@ -54,7 +30,9 @@ const generateQRCodeWithLogo = async (token) => {
     });
 
     // public URL
-    const url = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(filename)}?alt=media&token=${tokenDownload}`;
+    const url = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/${encodeURIComponent(
+      filename,
+    )}?alt=media&token=${tokenDownload}`;
 
     return {
       status: 200,
@@ -69,4 +47,4 @@ const generateQRCodeWithLogo = async (token) => {
   }
 };
 
-module.exports = generateQRCodeWithLogo;
+module.exports = generateQRCode;
