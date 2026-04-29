@@ -20,9 +20,11 @@ module.exports = (sequelize, DataTypes) => {
       pirt_url: DataTypes.STRING,
       bpom_url: DataTypes.STRING,
       halal_url: DataTypes.STRING,
+      nib_url: DataTypes.STRING,
       pirt_status: DataTypes.STRING,
       bpom_status: DataTypes.STRING,
       halal_status: DataTypes.STRING,
+      nib_status: DataTypes.STRING,
     },
     {
       sequelize,

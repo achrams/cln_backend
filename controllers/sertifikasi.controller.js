@@ -47,6 +47,8 @@ module.exports = {
         bpom_url,
         pirt_url,
         halal_url,
+        nib_url,
+        nib_status: "Uploaded",
         bpom_status: "Uploaded",
         pirt_status: "Uploaded",
         halal_status: "Uploaded",

@@ -21,6 +21,9 @@ module.exports = {
       halal_url: {
         type: Sequelize.STRING,
       },
+      nib_url: {
+        type: Sequelize.STRING,
+      },
       pirt_status: {
         type: Sequelize.STRING,
       },
@@ -28,6 +31,9 @@ module.exports = {
         type: Sequelize.STRING,
       },
       halal_status: {
+        type: Sequelize.STRING,
+      },
+      nib_status: {
         type: Sequelize.STRING,
       },
       createdAt: {
