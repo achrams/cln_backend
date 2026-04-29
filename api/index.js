@@ -29,5 +29,5 @@ app.get("/", (req, res) => {
   });
 });
 
-module.exports = app;
-module.exports.handler = serverless(app);
+// ✅ export tunggal
+module.exports = serverless(app);
